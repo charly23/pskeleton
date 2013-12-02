@@ -6,11 +6,27 @@ class PL_BaseView {
 
 	}
 
-	public function render( $name ) {
+	public function render( $name, $echo = true ) {
 
 		$path = PSKELETON_BASEPATH . '/views/';
 
-		require $path . $name . ".php";
+		if( ! $echo ) {
+
+			ob_start();
+
+			require $path . $name . ".php";
+
+			$html = ob_get_contents();
+
+			ob_end_clean();
+
+			return $html;
+
+		} else {
+			
+			require $path . $name . ".php";
+				
+		}
 
 	}
 

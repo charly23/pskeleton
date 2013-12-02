@@ -7,7 +7,7 @@ Author: Plonta Creative
 Author URI: http://plontacreative.com/
 */
 
-
+//error_reporting(E_ALL);
 if(!  class_exists('PSkeleton_Bootstrap') ) {
 
 	require 'config/constants.php';
@@ -26,8 +26,10 @@ if(!  class_exists('PSkeleton_Bootstrap') ) {
 		require PSKELETON_LIB . '/PL_BaseView.php';
 	}
 
+	spl_autoload_register( array('PSkeleton_Bootstrap', 'autoloadControllers') );
+
 	$pskBootstrap = new PSkeleton_Bootstrap();
 
-	spl_autoload_register( array('PSkeleton_Bootstrap', 'autoloadControllers') );
+	//$pskBootstrap->test = "1234";
 
 }

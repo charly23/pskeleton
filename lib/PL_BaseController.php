@@ -4,7 +4,7 @@ class PL_BaseController {
 
 	public function __construct() {
 
-		//$this->view = new PL_BaseView();
+		$this->view = new PL_BaseView();
 
 	}
 
@@ -12,9 +12,16 @@ class PL_BaseController {
 
 		$path = PSKELETON_BASEPATH . '/models/';
 
-		$file = strtolower($model_name) . "_model";
+		$file = $path . strtolower($model_name) . "_model.php";
 
-		require $path . $model_name . ".php" ;
+		require $file;
+
+		if( file_exists( $file) ) {
+
+			$modelName = $model_name . '_Model';
+
+			$this->model = new $modelName();
+		}
 
 	}
 	
