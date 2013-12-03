@@ -1,17 +1,16 @@
 <?php
 
-class PSkeleton_Bootstrap {
+class PL_Bootstrap {
 
 	protected $controllers;
 
-	public function __construct() {
-
-		$this->addAction('wp', array('User', 'submitRegistration') );
-
-		$this->addShortcode('user-registration', array('User', 'userRegistrationForm'));
-
-	}
-
+	/**
+	 * Custom add action which accepts the same arguments as the add_action of wordpress. 
+	 * 1st Argument - @type string   Hook name
+	 * 2nd Argument - @type array   Must be an array('Controller', 'function')
+	 * 3rd Argument (optional) - @type int   Priority 
+	 * 4th Argument (optional) - @type int   Number of parameters
+	 */
 	public function addAction() {
 
 		$numArgs = func_num_args();
@@ -25,7 +24,7 @@ class PSkeleton_Bootstrap {
 		$param 	= func_get_arg(1);
 
 		if( count( $param ) != 2 ) {
-			throw new Exception("Action requires only two parameters.");
+			throw new Exception("Second argument of the addAction() must be an array with 1st argument as the Controller and 2nd for the function.");
 		}
 
 		list( $controller, $function ) = $param;
@@ -44,6 +43,13 @@ class PSkeleton_Bootstrap {
 
 	}
 
+	/**
+	 * Custom add action which accepts the same arguments as the add_action of wordpress. 
+	 * 1st Argument - @type string   Hook name
+	 * 2nd Argument - @type array   Must be an array('Controller', 'function')
+	 * 3rd Argument (optional) - @type int   Priority 
+	 * 4th Argument (optional) - @type int   Number of parameters
+	 */
 	public function addFilter() {
 		$numArgs = func_num_args();
 
@@ -56,7 +62,7 @@ class PSkeleton_Bootstrap {
 		$param 	= func_get_arg(1);
 
 		if( count( $param ) != 2 ) {
-			throw new Exception("Action requires only two parameters.");
+			throw new Exception("Second argument of the addAction() must be an array with 1st argument as the Controller and 2nd for the function.");
 		}
 
 		list( $controller, $function ) = $param;
@@ -74,6 +80,11 @@ class PSkeleton_Bootstrap {
 	}
 
 
+	/**
+	 * Custom add shortcode which accepts the same arguments as the add_shortcode of wordpress.
+	 * 1st Argument - @type string   Hook name
+	 * 2nd Argument - @type array   Must be an array('Controller', 'function')
+	 */
 	public function addShortcode( $shortcode, $param ) {
 
 		if( count( $param ) != 2 ) {
@@ -105,6 +116,9 @@ class PSkeleton_Bootstrap {
 	}
 	
 
+	/**
+	 * The Controller autoloader class
+	 */
 	public static function autoloadControllers( $class ) {
 
 		$path = PSKELETON_BASEPATH . '/controllers/';

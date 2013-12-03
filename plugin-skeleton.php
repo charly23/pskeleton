@@ -8,11 +8,9 @@ Author URI: http://plontacreative.com/
 */
 
 //error_reporting(E_ALL);
-if(!  class_exists('PSkeleton_Bootstrap') ) {
+if( ! class_exists('PSkeleton_Bootstrap') ) {
 
 	require 'config/constants.php';
-
-	require 'lib/PSkeleton_Bootstrap.php';
 
 	if(! class_exists('PL_BaseController') ) { 
 		require PSKELETON_LIB . '/PL_BaseController.php';
@@ -26,10 +24,14 @@ if(!  class_exists('PSkeleton_Bootstrap') ) {
 		require PSKELETON_LIB . '/PL_BaseView.php';
 	}
 
+	if(! class_exists('PL_Bootstrap') ) { 
+		require PSKELETON_LIB . '/PL_Bootstrap.php';
+	}
+
+	require 'pskeleton-bootstrap.php';
+
 	spl_autoload_register( array('PSkeleton_Bootstrap', 'autoloadControllers') );
 
 	$pskBootstrap = new PSkeleton_Bootstrap();
-
-	//$pskBootstrap->test = "1234";
 
 }
